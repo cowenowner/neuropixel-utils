@@ -128,14 +128,14 @@ classdef ImecDataset < handle
                     isLFOnly = true;
                     [imec.pathRoot, imec.fileStem, imec.fileTypeLF, imec.fileImecNumber] = Neuropixel.ImecDataset.parseImecFileName(file);
                 end
-            elseif numel(file) == 1
-                [imec.pathRoot, imec.fileStem, imec.fileTypeAP, imec.fileImecNumber] = Neuropixel.ImecDataset.parseImecFileName(file);
-                isLFOnly= false;
-            else
+            elseif iscell(file) % Cowen: Fixed bug here with reading a single (non cell array) file.
                 for iF = 1:numel(file)
                     fprintf('Possible match: %s\n', file{iF});
                 end
                 error('Multiple imec datasets found in specified location, include file stem or a full path to refine the search');
+            else
+                [imec.pathRoot, imec.fileStem, imec.fileTypeAP, imec.fileImecNumber] = Neuropixel.ImecDataset.parseImecFileName(file);
+                isLFOnly= false;
             end
             
             if ~isLFOnly
