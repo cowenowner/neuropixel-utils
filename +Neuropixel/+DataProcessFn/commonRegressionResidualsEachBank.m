@@ -5,7 +5,7 @@ end
 forbidden_radius = 5;
 outer_radius = 20;
 skip = 10000; % skip every skip points
-lambda = 1e-03;
+% lambda = 1e-03;
 chanMaskGood = ismember(chIds, imec.goodChannels);
 % This is laborious, but we do a regression, find the n channels say
 % that are decent predictors for target channel. That becomes the
